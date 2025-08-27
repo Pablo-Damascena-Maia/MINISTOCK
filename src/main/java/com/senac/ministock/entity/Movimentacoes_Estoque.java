@@ -1,5 +1,6 @@
 package com.senac.ministock.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.text.DecimalFormat;
@@ -12,8 +13,9 @@ public class Movimentacoes_Estoque {
     @GeneratedValue
     @Column(name="movimentacoes_estoque_id")
     private int id;
+    @Enumerated(EnumType.STRING)
     @Column(name="movimentacoes_estoque_tipo")
-    private Enum<> tipo;
+    private Tipo tipo;
     @Column(name="movimentacoes_estoque_quantidade")
     private int quantidade;
     @Column(name="movimentacoes_estoque_data_movimentacao")
@@ -24,6 +26,26 @@ public class Movimentacoes_Estoque {
     private DecimalFormat preco_compra;
     @Column(name="movimentacoes_estoque_preco_venda")
     private  DecimalFormat preco_venda;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
 
     public int getId() {
         return id;
@@ -33,13 +55,6 @@ public class Movimentacoes_Estoque {
         this.id = id;
     }
 
-    public Enum getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Enum tipo) {
-        this.tipo = tipo;
-    }
 
     public int getQuantidade() {
         return quantidade;

@@ -17,3 +17,4 @@ public class Movimentacoes_EstoqueService {
     public List<Movimentacoes_Estoque> listarMovimentacoesEstoque() {
         return this.movimentacoesEstoqueRepository.findAll();
     }
+}

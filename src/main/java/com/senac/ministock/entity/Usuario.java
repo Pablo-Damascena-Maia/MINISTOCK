@@ -1,10 +1,9 @@
 package com.senac.ministock.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name= "usuario")
@@ -17,12 +16,51 @@ public class Usuario {
     private String email;
     @Column(name="usuario_senha_hash")
     private String senha_hash;
+    @Enumerated(EnumType.STRING)
     @Column(name="usuario_perfil")
-    private Enum<> perfil;
+    private  Perfil perfil;
     @Column(name="usuario_data_criacao")
     private Date data_criacao;
     @Column(name="usuario_ultimo_login")
     private Date ultimo_login;
+    @OneToMany (mappedBy = "usuario")
+    private Set<Notificacao> notificacaos;
+    @OneToMany (mappedBy = "usuario")
+    private Set<Produto> produtos;
+    @OneToMany (mappedBy = "usuario")
+    private Set<Movimentacoes_Estoque> movimentacoesEstoques;
+
+    public Set<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(Set<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public Set<Movimentacoes_Estoque> getMovimentacoesEstoques() {
+        return movimentacoesEstoques;
+    }
+
+    public void setMovimentacoesEstoques(Set<Movimentacoes_Estoque> movimentacoesEstoques) {
+        this.movimentacoesEstoques = movimentacoesEstoques;
+    }
+
+    public Set<Notificacao> getNotificacaos() {
+        return notificacaos;
+    }
+
+    public void setNotificacaos(Set<Notificacao> notificacaos) {
+        this.notificacaos = notificacaos;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
 
     public int getId() {
         return id;
@@ -56,13 +94,6 @@ public class Usuario {
         this.senha_hash = senha_hash;
     }
 
-    public Enum getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Enum perfil) {
-        this.perfil = perfil;
-    }
 
     public Date getData_criacao() {
         return data_criacao;

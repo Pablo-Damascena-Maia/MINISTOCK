@@ -1,5 +1,6 @@
 package com.senac.ministock.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -15,12 +16,33 @@ public class Notificacao {
     private String titulo;
     @Column(name="notificacao_mensagem")
     private String mensagem;
+    @Enumerated(EnumType.STRING)
     @Column(name="notificacao_tipo")
-    private Enum<> tipo;
+    private Tipo tipo;
     @Column(name="notificacao_lida")
     private Integer lida;
     @Column(name="notificacao_data_criacao")
     private Date data_criacao;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
 
     public Integer getId() {
         return id;
@@ -44,14 +66,6 @@ public class Notificacao {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
-    }
-
-    public Enum<E> getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Enum<E> tipo) {
-        this.tipo = tipo;
     }
 
     public Integer getLida() {

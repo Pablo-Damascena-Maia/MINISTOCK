@@ -1,7 +1,9 @@
 package com.senac.ministock.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.File;
 import java.util.Date;
 
 @Entity
@@ -29,6 +31,28 @@ public class Produto {
     private int criado_por;
     @Column(name="produto_data_atualizacao")
     private Date data_atualizacao;
+    @Column(name="produto_imagem_url")
+    private String imagem_url;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getImagem_url() {
+        return imagem_url;
+    }
+
+    public void setImagem_url(String imagem_url) {
+        this.imagem_url = imagem_url;
+    }
 
     public int getId() {
         return id;
