@@ -20,6 +20,6 @@ public class NotificacaoController {
 
     @GetMapping("/listar")
     public ResponseEntity<List<Notificacao>>listarnotificacao(){
-        return new ResponseEntity.ok(notificacaoService.listarNotificacao());
+        return  ResponseEntity.ok(notificacaoService.listarNotificacao());
     }
 }
