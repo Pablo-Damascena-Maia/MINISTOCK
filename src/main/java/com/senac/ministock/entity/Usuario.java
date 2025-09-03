@@ -8,6 +8,8 @@ import java.util.Set;
 @Entity
 @Table(name= "usuario")
 public class Usuario {
+    @Id
+    @GeneratedValue
     @Column(name="usuario_id")
     private int id;
     @Column(name="usuario_nome")

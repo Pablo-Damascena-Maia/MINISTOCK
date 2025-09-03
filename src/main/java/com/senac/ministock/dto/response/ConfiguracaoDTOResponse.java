@@ -1,6 +1,5 @@
 package com.senac.ministock.dto.response;
 
-
 public class ConfiguracaoDTOResponse {
     private Integer id;
     private String chave;
@@ -37,5 +36,10 @@ public class ConfiguracaoDTOResponse {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public void setStatus(Object status) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setStatus'");
     }
 }

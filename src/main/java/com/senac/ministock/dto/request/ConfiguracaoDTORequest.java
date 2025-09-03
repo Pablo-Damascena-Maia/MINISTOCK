@@ -31,4 +31,9 @@ public class ConfiguracaoDTORequest {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public Object getStatus() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getStatus'");
+    }
 }

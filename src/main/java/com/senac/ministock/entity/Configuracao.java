@@ -12,7 +12,7 @@ public class Configuracao {
     @Column(name="configuracao_id")
     private Integer id;
     @Column(name="configuracao_chave")
-    private Spring chave;
+    private String chave;
     @Column(name="configuracao_valor")
     private String valor;
     @Column(name="configuracao_descricao")
@@ -26,11 +26,11 @@ public class Configuracao {
         this.id = id;
     }
 
-    public Spring getChave() {
+    public String getChave() {
         return chave;
     }
 
-    public void setChave(Spring chave) {
+    public void setChave(String chave) {
         this.chave = chave;
     }
 
@@ -48,5 +48,15 @@ public class Configuracao {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public void setStatus(Object status) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setStatus'");
+    }
+
+    public Object getStatus() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getStatus'");
     }
 }
