@@ -13,6 +13,7 @@ public class ProdutoDTOResponse {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
     private String usuarioId;
+    private  Integer status;
 
     public Integer getId() {
         return id;
@@ -92,5 +93,13 @@ public class ProdutoDTOResponse {
 
     public void setUsuarioId(String usuarioId) {
         this.usuarioId = usuarioId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

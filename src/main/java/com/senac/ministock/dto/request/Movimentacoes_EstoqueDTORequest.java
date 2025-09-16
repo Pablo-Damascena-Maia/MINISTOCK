@@ -1,65 +1,19 @@
 package com.senac.ministock.dto.request;
 
-import java.math.BigDecimal;
-
-
 public class Movimentacoes_EstoqueDTORequest {
 
-    private String tipo; // ENTRADA / SAIDA
-
-
-    private Integer quantidade;
-
-    private String observacao;
-
-    private BigDecimal precoCompra;
-
-    private BigDecimal precoVenda;
-
-
+    private Integer usuarioId;
     private Integer produtoId;
+    private Integer quantidade;
+    private String tipoMovimentacao; // ex: "ENTRADA" ou "SAIDA"
+    private Integer status; // 1 = ativo, 0 = inativo, -1 = apagado
 
-
-    private String usuarioId;
-
-    public String getTipo() {
-        return tipo;
+    public Integer getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getObservacao() {
-        return observacao;
-    }
-
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public BigDecimal getPrecoCompra() {
-        return precoCompra;
-    }
-
-    public void setPrecoCompra(BigDecimal precoCompra) {
-        this.precoCompra = precoCompra;
-    }
-
-    public BigDecimal getPrecoVenda() {
-        return precoVenda;
-    }
-
-    public void setPrecoVenda(BigDecimal precoVenda) {
-        this.precoVenda = precoVenda;
+    public void setUsuarioId(Integer usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public Integer getProdutoId() {
@@ -70,11 +24,27 @@ public class Movimentacoes_EstoqueDTORequest {
         this.produtoId = produtoId;
     }
 
-    public String getUsuarioId() {
-        return usuarioId;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setUsuarioId(String usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getTipoMovimentacao() {
+        return tipoMovimentacao;
+    }
+
+    public void setTipoMovimentacao(String tipoMovimentacao) {
+        this.tipoMovimentacao = tipoMovimentacao;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

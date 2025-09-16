@@ -10,10 +10,4 @@ public class ConfiguracaoDTOUpdateRequest {
     public void setStatus(int status) {
         this.status = status;
     }
-
-    public String getChave() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getChave'");
-    }   
-
 }

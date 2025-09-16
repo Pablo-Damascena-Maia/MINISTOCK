@@ -1,62 +1,67 @@
 package com.senac.ministock.entity;
 
 import jakarta.persistence.*;
-
-import javax.swing.*;
+import org.w3c.dom.Text;
 
 @Entity
-@Table(name="configuracao")
+@Table(name = "configuracao")
 public class Configuracao {
+
     @Id
-    @GeneratedValue
-    @Column(name="configuracao_id")
-    private Integer id;
-    @Column(name="configuracao_chave")
-    private String chave;
-    @Column(name="configuracao_valor")
-    private String valor;
-    @Column(name="configuracao_descricao")
-    private String descricao;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "configuracao_id")
+    private Integer configuracaoId;
 
-    public Integer getId() {
-        return id;
+    @Column(name = "configuracao_chave", nullable = false)
+    private String configuracaoChave;
+
+
+    @Column(name = "configuracao_valor", nullable = false, unique = true)
+    private String configuracaoValor;
+
+    @Column(name = "configuracao_descricao")
+    private String configuracaoDescricao;
+
+    @Column(name = "configuracao_status")
+    private Integer status;
+
+    public Integer getConfiguracaoId() {
+        return configuracaoId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setConfiguracaoId(Integer configuracaoId) {
+        this.configuracaoId = configuracaoId;
     }
 
-    public String getChave() {
-        return chave;
+    public String getConfiguracaoChave() {
+        return configuracaoChave;
     }
 
-    public void setChave(String chave) {
-        this.chave = chave;
+    public void setConfiguracaoChave(String configuracaoChave) {
+        this.configuracaoChave = configuracaoChave;
     }
 
-    public String getValor() {
-        return valor;
+    public String getConfiguracaoValor() {
+        return configuracaoValor;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setConfiguracaoValor(String configuracaoValor) {
+        this.configuracaoValor = configuracaoValor;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getConfiguracaoDescricao() {
+        return configuracaoDescricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setConfiguracaoDescricao(String configuracaoDescricao) {
+        this.configuracaoDescricao = configuracaoDescricao;
     }
 
-    public void setStatus(Object status) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setStatus'");
+    public Integer getStatus() {
+        return status;
     }
 
-    public Object getStatus() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStatus'");
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

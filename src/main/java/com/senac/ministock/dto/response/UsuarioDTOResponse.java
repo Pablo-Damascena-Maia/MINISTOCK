@@ -2,20 +2,20 @@ package com.senac.ministock.dto.response;
 
 import java.time.LocalDateTime;
 
-
 public class UsuarioDTOResponse {
-    private String id;
+    private int id;
     private String nome;
     private String email;
     private String perfil;
     private LocalDateTime dataCriacao;
     private LocalDateTime ultimoLogin;
+    private String status; // adicionei este atributo
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,5 +57,13 @@ public class UsuarioDTOResponse {
 
     public void setUltimoLogin(LocalDateTime ultimoLogin) {
         this.ultimoLogin = ultimoLogin;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

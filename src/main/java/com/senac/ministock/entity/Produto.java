@@ -3,14 +3,13 @@ package com.senac.ministock.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.io.File;
 import java.util.Date;
 
 @Entity
 @Table(name="produto")
 public class Produto {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="produto_id")
     private int id;
     @Column(name="produto_nome")
@@ -18,41 +17,27 @@ public class Produto {
     @Column(name="produto_descricao")
     private String descricao;
     @Column(name="produto_data_entrada")
-    private Date data_entrada;
+    private Date dataEntrada;
     @Column(name="produto_quantidade_estoque")
-    private int quantidade_estoque;
+    private int quantidadeEstoque;
     @Column(name="produto_codigo_barras")
-    private String codigo_barras;
+    private String codigoBarras;
     @Column(name="produto_ativo")
     private Boolean ativo;
     @Column(name="produto_data_criacao")
-    private Date data_criacao;
+    private Date dataCriacao;
     @Column(name="produto_criado_por")
-    private int criado_por;
+    private int criadoPor;
     @Column(name="produto_data_atualizacao")
-    private Date data_atualizacao;
+    private Date dataAtualizacao;
     @Column(name="produto_imagem_url")
-    private String imagem_url;
+    private String imagemUrl;
+    @Column(name="produto_status")
+    private Integer status;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getImagem_url() {
-        return imagem_url;
-    }
-
-    public void setImagem_url(String imagem_url) {
-        this.imagem_url = imagem_url;
-    }
 
     public int getId() {
         return id;
@@ -78,28 +63,28 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public Date getData_entrada() {
-        return data_entrada;
+    public Date getDataEntrada() {
+        return dataEntrada;
     }
 
-    public void setData_entrada(Date data_entrada) {
-        this.data_entrada = data_entrada;
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
-    public int getQuantidade_estoque() {
-        return quantidade_estoque;
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
     }
 
-    public void setQuantidade_estoque(int quantidade_estoque) {
-        this.quantidade_estoque = quantidade_estoque;
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public String getCodigo_barras() {
-        return codigo_barras;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setCodigo_barras(String codigo_barras) {
-        this.codigo_barras = codigo_barras;
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
 
     public Boolean getAtivo() {
@@ -110,27 +95,51 @@ public class Produto {
         this.ativo = ativo;
     }
 
-    public Date getData_criacao() {
-        return data_criacao;
+    public Date getDataCriacao() {
+        return dataCriacao;
     }
 
-    public void setData_criacao(Date data_criacao) {
-        this.data_criacao = data_criacao;
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
-    public int getCriado_por() {
-        return criado_por;
+    public int getCriadoPor() {
+        return criadoPor;
     }
 
-    public void setCriado_por(int criado_por) {
-        this.criado_por = criado_por;
+    public void setCriadoPor(int criadoPor) {
+        this.criadoPor = criadoPor;
     }
 
-    public Date getData_atualizacao() {
-        return data_atualizacao;
+    public Date getDataAtualizacao() {
+        return dataAtualizacao;
     }
 
-    public void setData_atualizacao(Date data_atualizacao) {
-        this.data_atualizacao = data_atualizacao;
+    public void setDataAtualizacao(Date dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public String getImagemUrl() {
+        return imagemUrl;
+    }
+
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

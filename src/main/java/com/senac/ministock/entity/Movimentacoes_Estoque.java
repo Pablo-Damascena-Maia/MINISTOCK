@@ -2,41 +2,54 @@ package com.senac.ministock.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.text.DecimalFormat;
 import java.util.Date;
 
 @Entity
 @Table(name="movimentacoes_estoque")
 public class Movimentacoes_Estoque {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="movimentacoes_estoque_id")
     private int id;
+
     @Enumerated(EnumType.STRING)
     @Column(name="movimentacoes_estoque_tipo")
     private Tipo tipo;
+
     @Column(name="movimentacoes_estoque_quantidade")
     private int quantidade;
+
     @Column(name="movimentacoes_estoque_data_movimentacao")
-    private Date data_movimentacao;
+    private Date dataMovimentacao;
+
     @Column(name="movimentacoes_estoque_observacao")
     private String observacao;
+
     @Column(name="movimentacoes_estoque_preco_compra")
-    private DecimalFormat preco_compra;
+    private Double precoCompra;
+
     @Column(name="movimentacoes_estoque_preco_venda")
-    private  DecimalFormat preco_venda;
+    private Double precoVenda;
+
+    @Column(name="movimentacoes_estoque_status")
+    private Integer status;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "produto_id", nullable = false)
+    private Produto produto;
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getId() {
+        return id;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Tipo getTipo() {
@@ -47,15 +60,6 @@ public class Movimentacoes_Estoque {
         this.tipo = tipo;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
     public int getQuantidade() {
         return quantidade;
     }
@@ -64,12 +68,12 @@ public class Movimentacoes_Estoque {
         this.quantidade = quantidade;
     }
 
-    public Date getData_movimentacao() {
-        return data_movimentacao;
+    public Date getDataMovimentacao() {
+        return dataMovimentacao;
     }
 
-    public void setData_movimentacao(Date data_movimentacao) {
-        this.data_movimentacao = data_movimentacao;
+    public void setDataMovimentacao(Date dataMovimentacao) {
+        this.dataMovimentacao = dataMovimentacao;
     }
 
     public String getObservacao() {
@@ -80,19 +84,43 @@ public class Movimentacoes_Estoque {
         this.observacao = observacao;
     }
 
-    public DecimalFormat getPreco_compra() {
-        return preco_compra;
+    public Double getPrecoCompra() {
+        return precoCompra;
     }
 
-    public void setPreco_compra(DecimalFormat preco_compra) {
-        this.preco_compra = preco_compra;
+    public void setPrecoCompra(Double precoCompra) {
+        this.precoCompra = precoCompra;
     }
 
-    public DecimalFormat getPreco_venda() {
-        return preco_venda;
+    public Double getPrecoVenda() {
+        return precoVenda;
     }
 
-    public void setPreco_venda(DecimalFormat preco_venda) {
-        this.preco_venda = preco_venda;
+    public void setPrecoVenda(Double precoVenda) {
+        this.precoVenda = precoVenda;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

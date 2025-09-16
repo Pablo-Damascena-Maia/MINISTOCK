@@ -1,19 +1,13 @@
 package com.senac.ministock.dto.request;
 
-
-
 public class UsuarioDTORequest {
 
     private String nome;
-
-
     private String email;
-
-
     private String senha;
-
-
     private String perfil; // ADMIN, USER, etc.
+    private Integer status;
+
 
     public String getNome() {
         return nome;
@@ -46,4 +40,14 @@ public class UsuarioDTORequest {
     public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+
 }

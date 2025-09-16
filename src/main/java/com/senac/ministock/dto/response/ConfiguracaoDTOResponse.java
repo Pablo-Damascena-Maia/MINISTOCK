@@ -1,45 +1,49 @@
 package com.senac.ministock.dto.response;
 
 public class ConfiguracaoDTOResponse {
-    private Integer id;
-    private String chave;
-    private String valor;
-    private String descricao;
+    private Integer configuracaoId;
+    private String configuracaoChave;
+    private String configuracaoValor;
+    private String configuracaoDescricao;
+    private Integer status;
 
-    public Integer getId() {
-        return id;
+    public Integer getConfiguracaoId() {
+        return configuracaoId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setConfiguracaoId(Integer configuracaoId) {
+        this.configuracaoId = configuracaoId;
     }
 
-    public String getChave() {
-        return chave;
+    public String getConfiguracaoChave() {
+        return configuracaoChave;
     }
 
-    public void setChave(String chave) {
-        this.chave = chave;
+    public void setConfiguracaoChave(String configuracaoChave) {
+        this.configuracaoChave = configuracaoChave;
     }
 
-    public String getValor() {
-        return valor;
+    public String getConfiguracaoValor() {
+        return configuracaoValor;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setConfiguracaoValor(String configuracaoValor) {
+        this.configuracaoValor = configuracaoValor;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getConfiguracaoDescricao() {
+        return configuracaoDescricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setConfiguracaoDescricao(String configuracaoDescricao) {
+        this.configuracaoDescricao = configuracaoDescricao;
     }
 
-    public void setStatus(Object status) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setStatus'");
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

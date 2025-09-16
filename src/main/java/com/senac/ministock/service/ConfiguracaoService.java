@@ -1,85 +1,86 @@
 package com.senac.ministock.service;
 
-import com.senac.ministock.repository.ConfiguracaoRepository;
 import com.senac.ministock.dto.request.ConfiguracaoDTORequest;
-import com.senac.ministock.dto.request.ConfiguracaoDTOUpdateRequest;
 import com.senac.ministock.dto.response.ConfiguracaoDTOResponse;
 import com.senac.ministock.dto.response.ConfiguracaoDTOUpdateResponse;
 import com.senac.ministock.entity.Configuracao;
+import com.senac.ministock.repository.ConfiguracaoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ConfiguracaoService {
+
     private final ConfiguracaoRepository configuracaoRepository;
 
     public ConfiguracaoService(ConfiguracaoRepository configuracaoRepository) {
         this.configuracaoRepository = configuracaoRepository;
     }
 
-    public List<Configuracao> listarConfiguracao() {
-        return configuracaoRepository.findAll();
+    public List<ConfiguracaoDTOResponse> listarConfiguracoes() {
+        return configuracaoRepository.listarConfiguracoes()
+                .stream()
+                .map(this::converterParaDTOResponse)
+                .collect(Collectors.toList());
     }
 
-    public Configuracao listarPorId(Integer configuracaoId) {
-        Optional<Configuracao> configuracao = configuracaoRepository.findById(configuracaoId);
-        return configuracao.orElse(null);
+    public ConfiguracaoDTOResponse listarPorConfiguracaoId(Integer configuracaoId) {
+        Configuracao configuracao = configuracaoRepository.obterConfiguracaoPeloId(configuracaoId);
+        if (configuracao == null) return null;
+        return converterParaDTOResponse(configuracao);
     }
 
-    public ConfiguracaoDTOResponse criarConfiguracao(ConfiguracaoDTORequest configuracaoDTORequest) {
+    @Transactional
+    public ConfiguracaoDTOResponse criarConfiguracao(ConfiguracaoDTORequest dto) {
         Configuracao configuracao = new Configuracao();
-        configuracao.setChave(configuracaoDTORequest.getChave());
-        configuracao.setStatus(configuracaoDTORequest.getStatus());
-        // Adicione outros campos conforme necessário
-
-        Configuracao saved = configuracaoRepository.save(configuracao);
-
-        ConfiguracaoDTOResponse response = new ConfiguracaoDTOResponse();
-        response.setId(saved.getId());
-        response.setChave(saved.getChave());
-        response.setStatus(saved.getStatus());
-        // Adicione outros campos conforme necessário
-
-        return response;
+        configuracao.setConfiguracaoChave(dto.getConfiguracaoChave());
+        configuracao.setConfiguracaoValor(dto.getConfiguracaoValor());
+        configuracao.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
+        configuracaoRepository.save(configuracao);
+        return converterParaDTOResponse(configuracao);
     }
 
-    public ConfiguracaoDTOResponse atualizarConfiguracao(Integer configuracaoId, ConfiguracaoDTOUpdateRequest configuracaoDTOUpdateRequest) {
-        Optional<Configuracao> configuracaoOpt = configuracaoRepository.findById(configuracaoId);
-        if (configuracaoOpt.isPresent()) {
-            Configuracao configuracao = configuracaoOpt.get();
-            configuracao.setChave(configuracaoDTOUpdateRequest.getChave());
-            configuracao.setStatus(configuracaoDTOUpdateRequest.getStatus());
-            // Atualize outros campos conforme necessário
+    @Transactional
+    public ConfiguracaoDTOResponse atualizarConfiguracao(Integer configuracaoId, ConfiguracaoDTORequest dto) {
+        Configuracao configuracaoExistente = configuracaoRepository.obterConfiguracaoPeloId(configuracaoId);
+        if (configuracaoExistente == null) return null;
 
-            Configuracao updated = configuracaoRepository.save(configuracao);
+        configuracaoExistente.setConfiguracaoChave(
+                dto.getConfiguracaoChave() != null ? dto.getConfiguracaoChave() : configuracaoExistente.getConfiguracaoChave()
+        );
+        configuracaoExistente.setConfiguracaoValor(
+                dto.getConfiguracaoValor() != null ? dto.getConfiguracaoValor() : configuracaoExistente.getConfiguracaoValor()
+        );
+        configuracaoExistente.setStatus(dto.getStatus() != null ? dto.getStatus() : configuracaoExistente.getStatus());
 
-            ConfiguracaoDTOResponse response = new ConfiguracaoDTOResponse();
-            response.setId(updated.getId());
-            response.setChave(updated.getChave());
-            response.setStatus(updated.getStatus());
-            // Adicione outros campos conforme necessário
-
-            return response;
-        }
-        return null;
+        configuracaoRepository.save(configuracaoExistente);
+        return converterParaDTOResponse(configuracaoExistente);
     }
 
-    public ConfiguracaoDTOUpdateResponse atualizarStatusConfiguracao(Integer configuracaoId, ConfiguracaoDTOUpdateRequest configuracaoDTOUpdateRequest) {
-        Optional<Configuracao> configuracaoOpt = configuracaoRepository.findById(configuracaoId);
-        if (configuracaoOpt.isPresent()) {
-            Configuracao configuracao = configuracaoOpt.get();
-            configuracao.setStatus(configuracaoDTOUpdateRequest.getStatus());
+    @Transactional
+    public ConfiguracaoDTOUpdateResponse atualizarStatusConfiguracao(Integer configuracaoId, ConfiguracaoDTORequest dto) {
+        Configuracao configuracaoExistente = configuracaoRepository.obterConfiguracaoPeloId(configuracaoId);
+        if (configuracaoExistente == null) return null;
 
-            Configuracao updated = configuracaoRepository.save(configuracao);
+        configuracaoExistente.setStatus(dto.getStatus());
+        configuracaoRepository.save(configuracaoExistente);
+        return new ConfiguracaoDTOUpdateResponse(configuracaoExistente.getConfiguracaoId(), configuracaoExistente.getStatus());
+    }
 
-            ConfiguracaoDTOUpdateResponse response = new ConfiguracaoDTOUpdateResponse();
-            response.setId(updated.getId());
-            response.setStatus(updated.getStatus());
+    @Transactional
+    public void apagarConfiguracao(Integer configuracaoId) {
+        configuracaoRepository.apagadoLogicoConfiguracao(configuracaoId);
+    }
 
-            return response;
-        }
-        return null;
+    private ConfiguracaoDTOResponse converterParaDTOResponse(Configuracao configuracao) {
+        ConfiguracaoDTOResponse dto = new ConfiguracaoDTOResponse();
+        dto.setConfiguracaoId(configuracao.getConfiguracaoId());
+        dto.setConfiguracaoChave(configuracao.getConfiguracaoChave());
+        dto.setConfiguracaoValor(configuracao.getConfiguracaoValor());
+        dto.setStatus(configuracao.getStatus());
+        return dto;
     }
 }

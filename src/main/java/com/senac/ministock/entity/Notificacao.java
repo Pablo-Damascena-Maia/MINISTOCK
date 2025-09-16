@@ -2,47 +2,41 @@ package com.senac.ministock.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
 @Table(name ="notificacao")
 public class Notificacao {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="notificacao_id")
     private Integer id;
-    @Column(name="notificacao_titulo")
+
+    @Column(name="notificacao_titulo", nullable = false)
     private String titulo;
-    @Column(name="notificacao_mensagem")
+
+    @Column(name="notificacao_mensagem", nullable = false, columnDefinition = "TEXT")
     private String mensagem;
+
     @Enumerated(EnumType.STRING)
-    @Column(name="notificacao_tipo")
-    private Tipo tipo;
+    @Column(name="notificacao_tipo", nullable = false)
+    private Tipo tipo = Tipo.informativo; // default igual ao banco
+
     @Column(name="notificacao_lida")
     private Integer lida;
-    @Column(name="notificacao_data_criacao")
-    private Date data_criacao;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="notificacao_data_criacao", updatable = false, insertable = false)
+    private Date dataCriacao; // será preenchido automaticamente no banco
+
+    @Column(name="notificacao_status")
+    private Integer status = 1; // ativo por padrão
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
 
     public Integer getId() {
         return id;
@@ -68,6 +62,14 @@ public class Notificacao {
         this.mensagem = mensagem;
     }
 
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
     public Integer getLida() {
         return lida;
     }
@@ -76,11 +78,31 @@ public class Notificacao {
         this.lida = lida;
     }
 
-    public Date getData_criacao() {
-        return data_criacao;
+    public void setLida(int lida) {
+        this.lida = lida;
     }
 
-    public void setData_criacao(Date data_criacao) {
-        this.data_criacao = data_criacao;
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

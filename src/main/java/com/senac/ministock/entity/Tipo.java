@@ -1,3 +1,5 @@
 package com.senac.ministock.entity;
 
-public enum Tipo {ENTRADA, SAIDA, AJUSTE}
+public enum Tipo {
+    alerta, informativo
+}

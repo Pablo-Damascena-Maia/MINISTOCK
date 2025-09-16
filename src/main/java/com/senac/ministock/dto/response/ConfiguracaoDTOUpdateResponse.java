@@ -1,22 +1,29 @@
 package com.senac.ministock.dto.response;
 
 public class ConfiguracaoDTOUpdateResponse {
-    private int id;
+    private Integer configuracaoId;
+    private Integer status;
 
-    private int status;
+    public ConfiguracaoDTOUpdateResponse() {}
 
-    public int getStatus() {
+    public ConfiguracaoDTOUpdateResponse(Integer configuracaoId, Integer status) {
+        this.configuracaoId = configuracaoId;
+        this.status = status;
+    }
+
+    public Integer getConfiguracaoId() {
+        return configuracaoId;
+    }
+
+    public void setConfiguracaoId(Integer configuracaoId) {
+        this.configuracaoId = configuracaoId;
+    }
+
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Object status) {
-        this.status = (int) status;
-    }
-     public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

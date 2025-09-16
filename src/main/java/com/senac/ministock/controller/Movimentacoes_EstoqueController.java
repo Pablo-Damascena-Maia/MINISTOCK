@@ -1,12 +1,9 @@
 package com.senac.ministock.controller;
 
-
 import com.senac.ministock.dto.request.Movimentacoes_EstoqueDTORequest;
-import com.senac.ministock.dto.request.Movimentacoes_EstoqueDTOUpdateRequest;
 import com.senac.ministock.dto.response.Movimentacoes_EstoqueDTOResponse;
-import com.senac.ministock.dto.response.Movimentacoes_EstoqueDTOUpdateResponse;
-import com.senac.ministock.entity.Movimentacoes_Estoque;
 import com.senac.ministock.service.Movimentacoes_EstoqueService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,52 +12,44 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/movimentacao_estoque")
-public class Movimentacao_EstoqueController {
+@RequestMapping("api/movimentacoes_estoque")
+public class Movimentacoes_EstoqueController {
 
-    private Movimentacoes_EstoqueService service;
+    private final Movimentacoes_EstoqueService movimentacoes_EstoqueService;
 
-    public void MovimentacaoEstoqueController(Movimentacoes_EstoqueService service) {
-        this.service = service;
-    }
-
-    public Movimentacao_EstoqueController(Movimentacoes_EstoqueService service) {
-        this.service = service;
+    public Movimentacoes_EstoqueController(Movimentacoes_EstoqueService movimentacoes_EstoqueService) {
+        this.movimentacoes_EstoqueService = movimentacoes_EstoqueService;
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Movimentacoes_EstoqueDTOResponse>> listar() {
-        return ResponseEntity.ok(service.listarMovimentacoes());
-    }
-
-    @GetMapping("/listar_por_id/{movimentacao_id}")
-    public ResponseEntity<Movimentacoes_EstoqueDTOResponse> listarPorId(@PathVariable("movimentacao_id") Integer id) {
-        Movimentacoes_EstoqueDTOResponse m = service.listarPorId(id);
-        return (m != null) ? (ResponseEntity<Movimentacoes_EstoqueDTOResponse>) ResponseEntity.ok() : ResponseEntity.noContent().build();
+    @Operation(summary = "Listar todas as movimentações", description = "Retorna a lista completa de movimentações")
+    public ResponseEntity<List<Movimentacoes_EstoqueDTOResponse>> listarMovimentacoes() {
+        return ResponseEntity.ok(movimentacoes_EstoqueService.listarMovimentacoes());
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<Movimentacoes_EstoqueDTOResponse> criar(@Valid @RequestBody Movimentacoes_EstoqueDTORequest dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.criarMovimentacao(dto));
+    @Operation(summary = "Criar nova movimentação", description = "Cria um registro de movimentação de estoque")
+    public ResponseEntity<Movimentacoes_EstoqueDTOResponse> criarMovimentacao(
+            @Valid @RequestBody Movimentacoes_EstoqueDTORequest dto
+    ) {
+        Movimentacoes_EstoqueDTOResponse response = movimentacoes_EstoqueService.criarMovimentacao(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("/atualizar/{movimentacao_id}")
-    public ResponseEntity<Movimentacoes_EstoqueDTOResponse> atualizar(
-            @PathVariable("movimentacao_id") Integer id,
-            @Valid @RequestBody Movimentacoes_EstoqueDTOUpdateRequest dto) {
-        return ResponseEntity.ok(service.atualizarMovimentacao(id, dto));
+    @PutMapping("/atualizar/{id}")
+    @Operation(summary = "Atualizar movimentação", description = "Atualiza um registro de movimentação existente")
+    public ResponseEntity<Movimentacoes_EstoqueDTOResponse> atualizarMovimentacao(
+            @PathVariable("id") int id,
+            @Valid @RequestBody Movimentacoes_EstoqueDTORequest dto
+    ) {
+        Movimentacoes_EstoqueDTOResponse response = movimentacoes_EstoqueService.atualizarMovimentacao(id, dto);
+        return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("/atualizar_status/{movimentacao_id}")
-    public ResponseEntity<Movimentacoes_EstoqueDTOUpdateResponse> atualizarStatus(
-            @PathVariable("movimentacao_id") Integer id,
-            @Valid @RequestBody Movimentacoes_EstoqueDTORequest dto) {
-        return ResponseEntity.ok(service.atualizarStatusMovimentacao(id, dto));
-    }
-
-    @DeleteMapping("/apagar/{movimentacao_id}")
-    public ResponseEntity<Void> apagar(@PathVariable("movimentacao_id") Integer id) {
-        service.apagarMovimentacao(id);
+    @DeleteMapping("/remover/{id}")
+    @Operation(summary = "Remover movimentação", description = "Remove uma movimentação de estoque pelo ID")
+    public ResponseEntity<Void> removerMovimentacao(@PathVariable("id") int id) {
+        movimentacoes_EstoqueService.apagarMovimentacao(id);
         return ResponseEntity.noContent().build();
     }
 }

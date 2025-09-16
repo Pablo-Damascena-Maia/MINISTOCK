@@ -1,39 +1,39 @@
 package com.senac.ministock.dto.request;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class ConfiguracaoDTORequest {
 
-    private String chave;
+    @NotBlank
+    private String configuracaoChave;
 
+    @NotBlank
+    private String configuracaoValor;
 
-    private String valor;
+    private String configuracaoDescricao;
 
-    private String descricao;
+    @NotNull
+    private Integer configuracaoStatus;
+    private Integer status;
 
-    public String getChave() {
-        return chave;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setChave(String chave) {
-        this.chave = chave;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public String getValor() {
-        return valor;
-    }
+    public String getConfiguracaoChave() { return configuracaoChave; }
+    public void setConfiguracaoChave(String configuracaoChave) { this.configuracaoChave = configuracaoChave; }
 
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
+    public String getConfiguracaoValor() { return configuracaoValor; }
+    public void setConfiguracaoValor(String configuracaoValor) { this.configuracaoValor = configuracaoValor; }
 
-    public String getDescricao() {
-        return descricao;
-    }
+    public String getConfiguracaoDescricao() { return configuracaoDescricao; }
+    public void setConfiguracaoDescricao(String configuracaoDescricao) { this.configuracaoDescricao = configuracaoDescricao; }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Object getStatus() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStatus'");
-    }
+    public Integer getConfiguracaoStatus() { return configuracaoStatus; }
+    public void setConfiguracaoStatus(Integer configuracaoStatus) { this.configuracaoStatus = configuracaoStatus; }
 }

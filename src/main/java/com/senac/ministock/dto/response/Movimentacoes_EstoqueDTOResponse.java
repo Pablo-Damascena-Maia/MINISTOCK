@@ -1,19 +1,21 @@
 package com.senac.ministock.dto.response;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import com.senac.ministock.entity.Tipo;
 
+import java.util.Date;
 
 public class Movimentacoes_EstoqueDTOResponse {
+
     private Integer id;
-    private String tipo;
-    private Integer quantidade;
-    private String observacao;
-    private BigDecimal precoCompra;
-    private BigDecimal precoVenda;
-    private LocalDateTime dataMovimentacao;
+    private Integer usuarioId;
     private Integer produtoId;
-    private String usuarioId;
+    private Tipo tipo;
+    private Integer quantidade;
+    private Date dataMovimentacao;
+    private String observacao;
+    private Double precoCompra;
+    private Double precoVenda;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -23,11 +25,27 @@ public class Movimentacoes_EstoqueDTOResponse {
         this.id = id;
     }
 
-    public String getTipo() {
+    public Integer getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Integer usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public Integer getProdutoId() {
+        return produtoId;
+    }
+
+    public void setProdutoId(Integer produtoId) {
+        this.produtoId = produtoId;
+    }
+
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 
@@ -39,6 +57,14 @@ public class Movimentacoes_EstoqueDTOResponse {
         this.quantidade = quantidade;
     }
 
+    public Date getDataMovimentacao() {
+        return dataMovimentacao;
+    }
+
+    public void setDataMovimentacao(Date dataMovimentacao) {
+        this.dataMovimentacao = dataMovimentacao;
+    }
+
     public String getObservacao() {
         return observacao;
     }
@@ -47,43 +73,27 @@ public class Movimentacoes_EstoqueDTOResponse {
         this.observacao = observacao;
     }
 
-    public BigDecimal getPrecoCompra() {
+    public Double getPrecoCompra() {
         return precoCompra;
     }
 
-    public void setPrecoCompra(BigDecimal precoCompra) {
+    public void setPrecoCompra(Double precoCompra) {
         this.precoCompra = precoCompra;
     }
 
-    public BigDecimal getPrecoVenda() {
+    public Double getPrecoVenda() {
         return precoVenda;
     }
 
-    public void setPrecoVenda(BigDecimal precoVenda) {
+    public void setPrecoVenda(Double precoVenda) {
         this.precoVenda = precoVenda;
     }
 
-    public LocalDateTime getDataMovimentacao() {
-        return dataMovimentacao;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setDataMovimentacao(LocalDateTime dataMovimentacao) {
-        this.dataMovimentacao = dataMovimentacao;
-    }
-
-    public Integer getProdutoId() {
-        return produtoId;
-    }
-
-    public void setProdutoId(Integer produtoId) {
-        this.produtoId = produtoId;
-    }
-
-    public String getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(String usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

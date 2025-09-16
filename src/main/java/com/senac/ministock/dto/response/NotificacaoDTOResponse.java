@@ -9,6 +9,7 @@ public class NotificacaoDTOResponse {
     private String tipo;
     private Boolean lida;
     private LocalDateTime dataCriacao;
+    private  Integer status;
     private String usuarioId;
 
     public Integer getId() {
@@ -57,6 +58,14 @@ public class NotificacaoDTOResponse {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getUsuarioId() {
