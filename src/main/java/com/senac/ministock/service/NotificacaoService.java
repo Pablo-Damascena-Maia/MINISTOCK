@@ -4,6 +4,7 @@ import com.senac.ministock.dto.request.NotificacaoDTORequest;
 import com.senac.ministock.dto.response.NotificacaoDTOResponse;
 import com.senac.ministock.dto.response.NotificacaoDTOUpdateResponse;
 import com.senac.ministock.entity.Notificacao;
+import com.senac.ministock.entity.Tipo;
 import com.senac.ministock.entity.Usuario;
 import com.senac.ministock.repository.NotificacaoRepository;
 import com.senac.ministock.repository.UsuarioRepository;
@@ -44,14 +45,35 @@ public class NotificacaoService {
 
     @Transactional
     public NotificacaoDTOResponse criarNotificacao(NotificacaoDTORequest dto) {
-        Usuario usuario = usuarioRepository.obterUsuarioPeloId(dto.getUsuarioId());
+        Notificacao n = new Notificacao();
+        n.setTitulo(dto.getTitulo());
+        n.setMensagem(dto.getMensagem());
+        n.setTipo(dto.getTipo() != null ? dto.getTipo() : Tipo.informativo);
+        n.setLida(dto.getLida() != null ? dto.getLida() : 0);
+        n.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
 
-        Notificacao notificacao = modelMapper.map(dto, Notificacao.class);
-        notificacao.setUsuario(usuario);
+        if (dto.getUsuarioId() != null) {
+            Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não encontrado"));
+            n.setUsuario(usuario);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário é obrigatório para a notificação");
+        }
 
-        Notificacao notificacaoSalva = notificacaoRepository.save(notificacao);
-        return modelMapper.map(notificacaoSalva, NotificacaoDTOResponse.class);
+        Notificacao saved = notificacaoRepository.save(n);
+
+        return new NotificacaoDTOResponse(
+                saved.getId(),
+                saved.getTitulo(),
+                saved.getMensagem(),
+                saved.getTipo(),
+                saved.getLida(),
+                saved.getDataCriacao(),
+                saved.getStatus(),
+                saved.getUsuario().getId()
+        );
     }
+
 
     @Transactional
     public NotificacaoDTOResponse atualizarNotificacao(Integer notificacaoId, NotificacaoDTORequest dto) {
