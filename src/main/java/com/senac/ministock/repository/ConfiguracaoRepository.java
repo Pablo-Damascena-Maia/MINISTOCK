@@ -2,7 +2,6 @@ package com.senac.ministock.repository;
 
 import com.senac.ministock.entity.Configuracao;
 import jakarta.transaction.Transactional;
-import org.apache.el.stream.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +24,6 @@ public interface ConfiguracaoRepository extends JpaRepository<Configuracao, Inte
     @Query("SELECT c FROM Configuracao c WHERE c.configuracaoId = :id AND c.status >= 0")
     Configuracao obterConfiguracaoPeloId(@Param("id") Integer configuracaoId);
 
-    boolean existsByConfiguracaoValor(String configuracaoValor);
+
 
 }

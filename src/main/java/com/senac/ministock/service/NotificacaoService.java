@@ -4,7 +4,7 @@ import com.senac.ministock.dto.request.NotificacaoDTORequest;
 import com.senac.ministock.dto.response.NotificacaoDTOResponse;
 import com.senac.ministock.dto.response.NotificacaoDTOUpdateResponse;
 import com.senac.ministock.entity.Notificacao;
-import com.senac.ministock.entity.Tipo;
+import com.senac.ministock.entity.TipoN;
 import com.senac.ministock.entity.Usuario;
 import com.senac.ministock.repository.NotificacaoRepository;
 import com.senac.ministock.repository.UsuarioRepository;
@@ -48,7 +48,7 @@ public class NotificacaoService {
         Notificacao n = new Notificacao();
         n.setTitulo(dto.getTitulo());
         n.setMensagem(dto.getMensagem());
-        n.setTipo(dto.getTipo() != null ? dto.getTipo() : Tipo.informativo);
+        n.setTipoN(dto.getTipoN() != null ? dto.getTipoN() : TipoN.INFORMATIVO);
         n.setLida(dto.getLida() != null ? dto.getLida() : 0);
         n.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
 
@@ -66,7 +66,7 @@ public class NotificacaoService {
                 saved.getId(),
                 saved.getTitulo(),
                 saved.getMensagem(),
-                saved.getTipo(),
+                saved.getTipoN(),
                 saved.getLida(),
                 saved.getDataCriacao(),
                 saved.getStatus(),
@@ -77,18 +77,19 @@ public class NotificacaoService {
 
     @Transactional
     public NotificacaoDTOResponse atualizarNotificacao(Integer notificacaoId, NotificacaoDTORequest dto) {
-        Notificacao notificacao = notificacaoRepository.findById(notificacaoId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Notificação não encontrada"));
-
-        modelMapper.map(dto, notificacao);
+        Notificacao n = notificacaoRepository.obterNotificacaoPeloId(notificacaoId);
+        n.setTitulo(dto.getTitulo());
+        n.setMensagem(dto.getMensagem());
+        n.setTipoN(dto.getTipoN() != null ? dto.getTipoN() : TipoN.INFORMATIVO);
+        n.setLida(dto.getLida() != null ? dto.getLida() : 0);
+        n.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
 
         if (dto.getUsuarioId() != null) {
-            Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não encontrado"));
-            notificacao.setUsuario(usuario);
+            Usuario usuario = usuarioRepository.obterUsuarioPeloId(dto.getUsuarioId());
+            n.setUsuario(usuario);
         }
 
-        Notificacao notificacaoAtualizada = notificacaoRepository.save(notificacao);
+        Notificacao notificacaoAtualizada = notificacaoRepository.save(n);
         return modelMapper.map(notificacaoAtualizada, NotificacaoDTOResponse.class);
     }
 
