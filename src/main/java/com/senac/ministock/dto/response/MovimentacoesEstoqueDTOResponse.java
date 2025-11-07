@@ -1,6 +1,6 @@
 package com.senac.ministock.dto.response;
 
-import com.senac.ministock.entity.Movimentacoes_Estoque;
+import com.senac.ministock.entity.MovimentacoesEstoque;
 import com.senac.ministock.entity.TipoM;
 
 import java.util.Date;
@@ -21,7 +21,7 @@ public class Movimentacoes_EstoqueDTOResponse {
     public Movimentacoes_EstoqueDTOResponse(int id, TipoM tipoM, int quantidade, Date dataMovimentacao, String observacao, Double precoCompra, Double precoVenda, Integer status, int id1, int id2) {
     }
 
-    public Movimentacoes_EstoqueDTOResponse(Movimentacoes_Estoque movimentacao) {
+    public Movimentacoes_EstoqueDTOResponse(MovimentacoesEstoque movimentacao) {
 
     }
 
