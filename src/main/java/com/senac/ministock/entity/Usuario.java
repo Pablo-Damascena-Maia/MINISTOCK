@@ -43,7 +43,7 @@ public class Usuario {
     private List<Produto> produtos = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Movimentacoes_Estoque> movimentacoesEstoques = new ArrayList<>();
+    private List<MovimentacoesEstoque> movimentacoesEstoques = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name="usuario_role",
             joinColumns = @JoinColumn(name = "usuario_id"),
@@ -130,11 +130,11 @@ public class Usuario {
         this.produtos = produtos;
     }
 
-    public List<Movimentacoes_Estoque> getMovimentacoesEstoques() {
+    public List<MovimentacoesEstoque> getMovimentacoesEstoques() {
         return movimentacoesEstoques;
     }
 
-    public void setMovimentacoesEstoques(List<Movimentacoes_Estoque> movimentacoesEstoques) {
+    public void setMovimentacoesEstoques(List<MovimentacoesEstoque> movimentacoesEstoques) {
         this.movimentacoesEstoques = movimentacoesEstoques;
     }
 

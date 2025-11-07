@@ -3,8 +3,10 @@ package com.senac.ministock.service;
 import com.senac.ministock.dto.request.ProdutoDTORequest;
 import com.senac.ministock.dto.response.ProdutoDTOResponse;
 import com.senac.ministock.dto.response.ProdutoDTOUpdateResponse;
+import com.senac.ministock.entity.CategoriaProduto;
 import com.senac.ministock.entity.Produto;
 import com.senac.ministock.entity.Usuario;
+import com.senac.ministock.repository.CategoriaProdutoRepository;
 import com.senac.ministock.repository.ProdutoRepository;
 import com.senac.ministock.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -23,12 +25,14 @@ public class ProdutoService {
     private final ProdutoRepository produtoRepository;
     private final UsuarioRepository usuarioRepository;
     private final ModelMapper modelMapper;
+    private final CategoriaProdutoRepository categoriaProdutoRepository;
 
     @Autowired
-    public ProdutoService(ProdutoRepository produtoRepository, UsuarioRepository usuarioRepository, ModelMapper modelMapper) {
+    public ProdutoService(ProdutoRepository produtoRepository, UsuarioRepository usuarioRepository, ModelMapper modelMapper, CategoriaProdutoRepository categoriaProdutoRepository) {
         this.produtoRepository = produtoRepository;
         this.usuarioRepository = usuarioRepository;
         this.modelMapper = modelMapper;
+        this.categoriaProdutoRepository = categoriaProdutoRepository;
     }
 
     public List<ProdutoDTOResponse> listarProdutos() {
@@ -62,6 +66,12 @@ public class ProdutoService {
             p.setUsuario(usuario);
             p.setCriadoPor(usuario.getId());
         }
+        if (dto.getCategoria_produtoId() != null) {
+            CategoriaProduto categoriaProduto = categoriaProdutoRepository.findById(dto.getCategoria_produtoId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria produto não encontrado"));
+            p.setCategoriaProduto(categoriaProduto);
+            p.setCriadoPor(categoriaProduto.getId());
+        }
 
         Produto salvo = produtoRepository.save(p);
         ProdutoDTOResponse response = new ProdutoDTOResponse();
@@ -88,6 +98,11 @@ public class ProdutoService {
             Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuario não encontrado"));
             p.setUsuario(usuario);
+        }
+        if (dto.getCategoria_produtoId() != null) {
+            CategoriaProduto categoriaProduto = categoriaProdutoRepository.findById(dto.getCategoria_produtoId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria produto não encontrado"));
+            p.setCategoriaProduto(categoriaProduto);
         }
 
         Produto salvo = produtoRepository.save(p);

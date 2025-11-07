@@ -1,6 +1,6 @@
 package com.senac.ministock.dto.response;
 
-public class Movimentacoes_EstoqueDTOUpdateResponse {
+public class MovimentacoesEstoqueDTOUpdateResponse {
 
     private Integer id;
     private Integer status;

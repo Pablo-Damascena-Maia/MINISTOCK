@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "categoria_produto")
-public class Categoria_Produto {
+public class CategoriaProduto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "categoria_produto_id")
@@ -15,15 +15,15 @@ public class Categoria_Produto {
     private String nome;
     @Column(name = "categoria_produto_status")
     private int status;
-    @OneToMany(mappedBy = "produto")
-    private Set<Produto> produto;
+    @OneToMany(mappedBy = "categoriaProduto")
+    private Set<Produto> produtos;
 
-    public Set<Produto> getProduto() {
-        return produto;
+    public Set<Produto> getProdutos() {
+        return produtos;
     }
 
-    public void setProduto(Set<Produto> produto) {
-        this.produto = produto;
+    public void setProdutos(Set<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     public int getId() {

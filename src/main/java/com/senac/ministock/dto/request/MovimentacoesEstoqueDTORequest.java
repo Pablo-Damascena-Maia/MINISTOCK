@@ -5,7 +5,7 @@ import com.senac.ministock.entity.TipoM;
 
 import java.util.Date;
 
-public class Movimentacoes_EstoqueDTORequest {
+public class MovimentacoesEstoqueDTORequest {
     private TipoM tipoM;
     private Integer quantidade;
     private Date dataMovimentacao;
@@ -16,7 +16,7 @@ public class Movimentacoes_EstoqueDTORequest {
     private Integer usuarioId;
     private Integer produtoId;
 
-    public Movimentacoes_EstoqueDTORequest() {}
+    public MovimentacoesEstoqueDTORequest() {}
 
     public TipoM getTipoM() {
         return tipoM;

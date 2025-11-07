@@ -13,6 +13,15 @@ public class ProdutoDTORequest {
     private Boolean ativo;
     private Integer status;
     private Integer usuarioId; // agora Integer para casar com a entidade
+    private Integer categoria_produtoId;
+
+    public Integer getCategoria_produtoId() {
+        return categoria_produtoId;
+    }
+
+    public void setCategoria_produtoId(Integer categoria_produtoId) {
+        this.categoria_produtoId = categoria_produtoId;
+    }
 
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }

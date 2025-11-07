@@ -1,13 +1,13 @@
 package com.senac.ministock.service;
 
-import com.senac.ministock.dto.request.Movimentacoes_EstoqueDTORequest;
-import com.senac.ministock.dto.response.Movimentacoes_EstoqueDTOResponse;
-import com.senac.ministock.dto.response.Movimentacoes_EstoqueDTOUpdateResponse;
-import com.senac.ministock.entity.Movimentacoes_Estoque;
+import com.senac.ministock.dto.request.MovimentacoesEstoqueDTORequest;
+import com.senac.ministock.dto.response.MovimentacoesEstoqueDTOResponse;
+import com.senac.ministock.dto.response.MovimentacoesEstoqueDTOUpdateResponse;
+import com.senac.ministock.entity.MovimentacoesEstoque;
 import com.senac.ministock.entity.Produto;
 import com.senac.ministock.entity.TipoM;
 import com.senac.ministock.entity.Usuario;
-import com.senac.ministock.repository.Movimentacoes_EstoqueRepository;
+import com.senac.ministock.repository.MovimentacoesEstoqueRepository;
 import com.senac.ministock.repository.ProdutoRepository;
 import com.senac.ministock.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -20,39 +20,39 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class Movimentacoes_EstoqueService {
+public class MovimentacoesEstoqueService {
 
-    private final Movimentacoes_EstoqueRepository movimentacoesRepository;
+    private final MovimentacoesEstoqueRepository movimentacoesRepository;
     private final UsuarioRepository usuarioRepository;
     private final ProdutoRepository produtoRepository;
     private final ModelMapper modelMapper;
 
-    public Movimentacoes_EstoqueService(Movimentacoes_EstoqueRepository movimentacoesRepository,
-                                        UsuarioRepository usuarioRepository,
-                                        ProdutoRepository produtoRepository,
-                                        ModelMapper modelMapper) {
+    public MovimentacoesEstoqueService(MovimentacoesEstoqueRepository movimentacoesRepository,
+                                       UsuarioRepository usuarioRepository,
+                                       ProdutoRepository produtoRepository,
+                                       ModelMapper modelMapper) {
         this.movimentacoesRepository = movimentacoesRepository;
         this.usuarioRepository = usuarioRepository;
         this.produtoRepository = produtoRepository;
         this.modelMapper = modelMapper;
     }
 
-    public List<Movimentacoes_EstoqueDTOResponse> listarMovimentacoes() {
+    public List<MovimentacoesEstoqueDTOResponse> listarMovimentacoes() {
         return movimentacoesRepository.findAll()
                 .stream()
-                .map(m -> modelMapper.map(m, Movimentacoes_EstoqueDTOResponse.class))
+                .map(m -> modelMapper.map(m, MovimentacoesEstoqueDTOResponse.class))
                 .toList();
     }
 
-    public Movimentacoes_EstoqueDTOResponse listarPorId(Integer id) {
-        Movimentacoes_Estoque movimentacao = movimentacoesRepository.findById(id)
+    public MovimentacoesEstoqueDTOResponse listarPorId(Integer id) {
+        MovimentacoesEstoque movimentacao = movimentacoesRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movimentação não encontrada"));
-        return modelMapper.map(movimentacao, Movimentacoes_EstoqueDTOResponse.class);
+        return modelMapper.map(movimentacao, MovimentacoesEstoqueDTOResponse.class);
     }
 
     @Transactional
-    public Movimentacoes_EstoqueDTOResponse criarMovimentacao(Movimentacoes_EstoqueDTORequest dto) {
-        Movimentacoes_Estoque movimentacao = new Movimentacoes_Estoque();
+    public MovimentacoesEstoqueDTOResponse criarMovimentacao(MovimentacoesEstoqueDTORequest dto) {
+        MovimentacoesEstoque movimentacao = new MovimentacoesEstoque();
         movimentacao.setTipoM(dto.getTipoM() != null ? dto.getTipoM() : TipoM.AJUSTE);
         movimentacao.setQuantidade(dto.getQuantidade() != null ? dto.getQuantidade() : 0);
         movimentacao.setDataMovimentacao(dto.getDataMovimentacao() != null ? dto.getDataMovimentacao() : new Date());
@@ -74,14 +74,14 @@ public class Movimentacoes_EstoqueService {
         }
 
         movimentacoesRepository.save(movimentacao);
-        return new Movimentacoes_EstoqueDTOResponse(movimentacao);
+        return new MovimentacoesEstoqueDTOResponse(movimentacao);
     }
 
 
 
     @Transactional
-    public Movimentacoes_EstoqueDTOResponse atualizarMovimentacao(Integer id, Movimentacoes_EstoqueDTORequest dto) {
-        Movimentacoes_Estoque movimentacao = movimentacoesRepository.obterMovimentacaoPeloId(id);
+    public MovimentacoesEstoqueDTOResponse atualizarMovimentacao(Integer id, MovimentacoesEstoqueDTORequest dto) {
+        MovimentacoesEstoque movimentacao = movimentacoesRepository.obterMovimentacaoPeloId(id);
         movimentacao.setTipoM(dto.getTipoM() != null ? dto.getTipoM() : TipoM.AJUSTE);
         movimentacao.setQuantidade(dto.getQuantidade() != null ? dto.getQuantidade() : 0);
         movimentacao.setDataMovimentacao(dto.getDataMovimentacao() != null ? dto.getDataMovimentacao() : new Date());
@@ -106,24 +106,24 @@ public class Movimentacoes_EstoqueService {
             movimentacao.setProduto(produto);
         }
 
-        Movimentacoes_Estoque atualizada = movimentacoesRepository.save(movimentacao);
-        return modelMapper.map(atualizada, Movimentacoes_EstoqueDTOResponse.class);
+        MovimentacoesEstoque atualizada = movimentacoesRepository.save(movimentacao);
+        return modelMapper.map(atualizada, MovimentacoesEstoqueDTOResponse.class);
     }
 
     @Transactional
-    public Movimentacoes_EstoqueDTOUpdateResponse atualizarStatusMovimentacao(Integer id, Movimentacoes_EstoqueDTORequest dto) {
-        Movimentacoes_Estoque movimentacao = movimentacoesRepository.findById(id)
+    public MovimentacoesEstoqueDTOUpdateResponse atualizarStatusMovimentacao(Integer id, MovimentacoesEstoqueDTORequest dto) {
+        MovimentacoesEstoque movimentacao = movimentacoesRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movimentação não encontrada"));
 
         movimentacao.setStatus(dto.getStatus());
 
-        Movimentacoes_Estoque atualizada = movimentacoesRepository.save(movimentacao);
-        return modelMapper.map(atualizada, Movimentacoes_EstoqueDTOUpdateResponse.class);
+        MovimentacoesEstoque atualizada = movimentacoesRepository.save(movimentacao);
+        return modelMapper.map(atualizada, MovimentacoesEstoqueDTOUpdateResponse.class);
     }
 
     @Transactional
     public void apagarMovimentacao(Integer id) {
-        Movimentacoes_Estoque movimentacao = movimentacoesRepository.findById(id)
+        MovimentacoesEstoque movimentacao = movimentacoesRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movimentação não encontrada"));
 
         movimentacao.setStatus(-1); // apagado lógico

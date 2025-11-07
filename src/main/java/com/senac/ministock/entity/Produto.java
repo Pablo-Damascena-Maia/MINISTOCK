@@ -38,6 +38,18 @@ public class Produto {
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "categoria_produto_id", nullable = false)
+    private CategoriaProduto categoriaProduto;
+
+    public CategoriaProduto getCategoriaProduto() {
+        return categoriaProduto;
+    }
+
+    public void setCategoriaProduto(CategoriaProduto categoriaProduto) {
+        this.categoriaProduto = categoriaProduto;
+    }
 
     public int getId() {
         return id;

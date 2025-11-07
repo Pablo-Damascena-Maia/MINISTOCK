@@ -11,15 +11,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface CategoriaProdutoReposytory extends JpaRepository<CategoriaProduto, Integer> {
+public interface CategoriaProdutoRepository extends JpaRepository<CategoriaProduto, Integer> {
     @Modifying
     @Transactional
-    @Query("UPDATE Categoria_Produto cp SET cp.status = -1 WHERE cp.id = :id")
+    @Query("UPDATE CategoriaProduto cp SET cp.status = -1 WHERE cp.id = :id")
     void apagadoLogicoCategoriaProduto(@Param("id") Integer id);
-    @Query("SELECT cp FROM Categoria_Produto cp WHERE cp.status >= 0")
+    @Query("SELECT cp FROM CategoriaProduto cp WHERE cp.status >= 0")
     List<CategoriaProduto> listarCategoriaProduto();
 
     // Obter notificação pelo id, apenas se ativa
-    @Query("SELECT cp FROM Categoria_Produto cp WHERE c.id = :id AND cp.status >= 0")
+    @Query("SELECT cp FROM CategoriaProduto cp WHERE cp.id = :id AND cp.status >= 0")
     CategoriaProduto obterCategoriaProdutoPeloId(@Param("id") Integer id);
 }

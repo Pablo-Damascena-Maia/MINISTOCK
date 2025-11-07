@@ -5,7 +5,7 @@ import com.senac.ministock.entity.TipoM;
 
 import java.util.Date;
 
-public class Movimentacoes_EstoqueDTOResponse {
+public class MovimentacoesEstoqueDTOResponse {
 
     private Integer id;
     private Integer usuarioId;
@@ -18,10 +18,10 @@ public class Movimentacoes_EstoqueDTOResponse {
     private Double precoVenda;
     private Integer status;
 
-    public Movimentacoes_EstoqueDTOResponse(int id, TipoM tipoM, int quantidade, Date dataMovimentacao, String observacao, Double precoCompra, Double precoVenda, Integer status, int id1, int id2) {
+    public MovimentacoesEstoqueDTOResponse(int id, TipoM tipoM, int quantidade, Date dataMovimentacao, String observacao, Double precoCompra, Double precoVenda, Integer status, int id1, int id2) {
     }
 
-    public Movimentacoes_EstoqueDTOResponse(MovimentacoesEstoque movimentacao) {
+    public MovimentacoesEstoqueDTOResponse(MovimentacoesEstoque movimentacao) {
 
     }
 

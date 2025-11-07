@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ConfiguracaoService {
+public class    ConfiguracaoService {
 
     private final ConfiguracaoRepository configuracaoRepository;
 

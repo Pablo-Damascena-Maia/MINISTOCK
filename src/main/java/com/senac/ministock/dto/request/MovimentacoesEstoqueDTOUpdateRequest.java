@@ -1,6 +1,6 @@
 package com.senac.ministock.dto.request;
 
-public class Movimentacoes_EstoqueDTOUpdateRequest {
+public class MovimentacoesEstoqueDTOUpdateRequest {
     private int status;
 
     public int getStatus() {
