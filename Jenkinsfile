@@ -41,6 +41,7 @@ pipeline {
             		bat "docker rm -v ${appName} || exit 0"  // Remover o container e os volumes associados
 
                     // Executar o novo container
+                    bat "docker-compose up -d --build"
 
                 }
             }
