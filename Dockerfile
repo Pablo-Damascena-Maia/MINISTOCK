@@ -1,6 +1,6 @@
 FROM maven:3.9.9-amazoncorretto-21-alpine AS build
 COPY . .
-RUN mvn clean package -DskipTests
+RUN mvnw clean package -DskipTests
 RUN ls -la /target/ministock-0.0.1-SNAPSHOT.jar
 FROM amazoncorretto:21-alpine
 COPY --from=build target/ministock-0.0.1-SNAPSHOT.jar app.jar
