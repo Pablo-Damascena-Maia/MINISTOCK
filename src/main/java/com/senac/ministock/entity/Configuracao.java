@@ -1,7 +1,7 @@
 package com.senac.ministock.entity;
 
 import jakarta.persistence.*;
-import org.w3c.dom.Text;
+
 
 @Entity
 @Table(name = "configuracao")

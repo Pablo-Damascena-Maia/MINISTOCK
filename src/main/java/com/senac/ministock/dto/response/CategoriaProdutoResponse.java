@@ -1,10 +1,5 @@
 package com.senac.ministock.dto.response;
 
-import com.senac.ministock.entity.Produto;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
-
-import java.util.Set;
 
 public class CategoriaProdutoResponse {
     private int id;

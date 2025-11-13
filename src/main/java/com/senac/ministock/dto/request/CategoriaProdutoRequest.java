@@ -1,6 +1,6 @@
 package com.senac.ministock.dto.request;
 
-import jakarta.validation.constraints.NotNull;
+
 
 public class CategoriaProdutoRequest {
     private String nome;

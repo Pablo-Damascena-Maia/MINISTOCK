@@ -1,7 +1,7 @@
 package com.senac.ministock.dto.request;
 
 import com.senac.ministock.entity.Perfil;
-import com.senac.ministock.entity.RoleName;
+
 
 import java.util.List;
 

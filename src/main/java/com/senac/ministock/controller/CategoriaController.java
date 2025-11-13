@@ -3,7 +3,6 @@ package com.senac.ministock.controller;
 import com.senac.ministock.dto.request.CategoriaProdutoRequest;
 import com.senac.ministock.dto.response.CategoriaProdutoResponse;
 import com.senac.ministock.dto.response.ProdutoDTOUpdateResponse;
-import com.senac.ministock.repository.CategoriaProdutoRepository;
 import com.senac.ministock.service.CategoriaProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
