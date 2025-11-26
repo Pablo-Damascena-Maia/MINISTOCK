@@ -23,16 +23,6 @@ public class SecurityConfiguration {
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
             "/api/usuario/email",
             "/api/usuario/criar",
-
-
-
-            "/v3/api-docs/**",
-            "/swagger-ui/**",
-            "/swagger-ui.html"
-    };
-
-    // Endpoints que requerem autenticação para serem acessados
-    public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
             "/api/usuario/atualizar",
             "/api/usuario/atualizarStatus",
             "/api/usuario/listar",
@@ -72,6 +62,17 @@ public class SecurityConfiguration {
             "/api/categoria_produto/listar",
             "/api/categoria_produto/listarPorId",
             "/api/categoria_produto/apagar",
+
+
+
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+    };
+
+    // Endpoints que requerem autenticação para serem acessados
+    public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
+
 
 
     };
