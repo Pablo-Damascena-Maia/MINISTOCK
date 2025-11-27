@@ -44,7 +44,9 @@ public class UsuarioAuthenticationFilter extends OncePerRequestFilter {
                 // Define o objeto de autenticação no contexto de segurança do Spring Security
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
-                throw new RuntimeException("O token está ausente.");
+                // Se o token estiver ausente, apenas continua o filtro para que o Spring Security
+                // possa aplicar as regras de acesso (permitir ou negar)
+                // Não é necessário lançar exceção aqui, pois o Spring Security fará isso.
             }
         }
         filterChain.doFilter(request, response); // Continua o processamento da requisição
