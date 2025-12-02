@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("api/categoriaProduto")
+@CrossOrigin("*")
 public class CategoriaController {
     private final CategoriaProdutoService categoriaProdutoService;
 
