@@ -29,7 +29,7 @@ public class SecurityConfiguration {
             "/api/usuario/listarPorId",
             "/api/usuario/apagar",
 
-            "/api/produto/atualizar",
+            "/api/produto/atualizar/{id}",
             "/api/produto/criar",
             "/api/produto/atualizarStatus",
             "/api/produto/listar",
