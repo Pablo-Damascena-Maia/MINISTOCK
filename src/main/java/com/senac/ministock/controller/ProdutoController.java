@@ -23,10 +23,10 @@ public class ProdutoController {
         this.produtoService = produtoService;
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/listarPorCategoria/{idCategoria}")
     @Operation(summary = "Listar produtos", description = "Endpoint para listar todos os produtos")
-    public ResponseEntity<List<ProdutoDTOResponse>> listarProdutos() {
-        return ResponseEntity.ok(produtoService.listarProdutos());
+    public ResponseEntity<List<ProdutoDTOResponse>> listarProdutos(@PathVariable("idCategoria") Integer id) {
+        return ResponseEntity.ok(produtoService.listarProdutos(id));
     }
 
     @GetMapping("/listarPorId/{id}")
@@ -64,6 +64,6 @@ public class ProdutoController {
     @Operation(summary = "Apagar produto", description = "Endpoint para apagar produto")
     public ResponseEntity<Void> apagar(@PathVariable("id") Integer id) {
         produtoService.apagarProduto(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(null);
     }
 }

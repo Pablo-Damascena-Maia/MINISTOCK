@@ -35,8 +35,8 @@ public class ProdutoService {
         this.categoriaProdutoRepository = categoriaProdutoRepository;
     }
 
-    public List<ProdutoDTOResponse> listarProdutos() {
-        return produtoRepository.listarProdutos()
+    public List<ProdutoDTOResponse> listarProdutos(Integer idCategoria) {
+        return produtoRepository.listarProdutos(idCategoria)
                 .stream()
                 .map(p -> modelMapper.map(p, ProdutoDTOResponse.class))
                 .toList();

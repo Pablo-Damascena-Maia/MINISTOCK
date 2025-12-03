@@ -32,7 +32,7 @@ public class SecurityConfiguration {
             "/api/produto/atualizar/{id}",
             "/api/produto/criar",
             "/api/produto/atualizarStatus",
-            "/api/produto/listar",
+            "/api/produto/listarPorCategoria/{idCategoria}",
             "/api/produto/listarPorId",
             "/api/produto/apagar/{id}",
 
@@ -53,15 +53,15 @@ public class SecurityConfiguration {
             "/api/configuracao/criar",
             "/api/configuracao/atualizarStatus",
             "/api/configuracao/listar",
-            "/api/configuracao/listarPorId",
-            "/api/configuracao/apagar",
+            "/api/configuracao/listarPorId/{id}",
+            "/api/configuracao/apagar/{id}",
 
-            "/api/categoria_produto/atualizar",
-            "/api/categoria_produto/criar",
-            "/api/categoria_produto/atualizarStatus",
-            "/api/categoria_produto/listar",
-            "/api/categoria_produto/listarPorId",
-            "/api/categoria_produto/apagar",
+            "/api/categoriaProduto/atualizar",
+            "/api/categoriaProduto/criar",
+            "/api/categoriaProduto/atualizarStatus",
+            "/api/categoriaProduto/listar",
+            "/api/categoriaProduto/listarPorId/{id}",
+            "/api/categoriaProduto/apagar/{id}",
 
 
 

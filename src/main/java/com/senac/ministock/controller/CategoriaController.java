@@ -22,9 +22,9 @@ public class CategoriaController {
     }
 
     @GetMapping("/listar")
-    @Operation(summary = "Listar produtos", description = "Endpoint para listar todos os produtos")
+    @Operation(summary = "Listar categorias", description = "Endpoint para listar todos os produtos")
     public ResponseEntity<List<CategoriaProdutoResponse>> listarCategoriaProdutos() {
-        return ResponseEntity.ok(categoriaProdutoService.listarProdutos());
+        return ResponseEntity.ok(categoriaProdutoService.listarCategoriaProdutos());
     }
 
     @GetMapping("/listarPorId/{id}")
@@ -39,7 +39,7 @@ public class CategoriaController {
     @Operation(summary = "Criar produto", description = "Endpoint para criar um novo produto")
     public ResponseEntity<CategoriaProdutoResponse> criarCategoriaProduto(@Valid @RequestBody CategoriaProdutoRequest dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(categoriaProdutoService.criarProduto(dto));
+                .body(categoriaProdutoService.criarCategoriaProduto(dto));
     }
 
     @PutMapping("/atualizar/{id}")
@@ -47,7 +47,7 @@ public class CategoriaController {
     public ResponseEntity<CategoriaProdutoResponse> atualizarCategoriaProduto(
             @PathVariable("id") Integer id,
             @Valid @RequestBody CategoriaProdutoRequest dto) {
-        return ResponseEntity.ok(categoriaProdutoService.atualizarProduto(id, dto));
+        return ResponseEntity.ok(categoriaProdutoService.atualizarCategoriaProduto(id, dto));
     }
 
     @PatchMapping("/atualizarStatus/{id}")
@@ -55,7 +55,7 @@ public class CategoriaController {
     public ResponseEntity<ProdutoDTOUpdateResponse> atualizarStatus(
             @PathVariable("id") Integer id,
             @Valid @RequestBody CategoriaProdutoRequest dto) {
-        return ResponseEntity.ok(categoriaProdutoService.atualizarStatusProduto(id, dto));
+        return ResponseEntity.ok(categoriaProdutoService.atualizarStatusCategoriaProduto(id, dto));
     }
 
     @DeleteMapping("/apagar/{id}")

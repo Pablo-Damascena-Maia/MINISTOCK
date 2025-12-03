@@ -32,8 +32,8 @@ public class CategoriaProdutoService {
         this.categoriaProdutoRepository = categoriaProdutoRepository;
     }
 
-    public List<CategoriaProdutoResponse> listarProdutos() {
-        return produtoRepository.listarProdutos()
+    public List<CategoriaProdutoResponse> listarCategoriaProdutos() {
+        return categoriaProdutoRepository.listarCategoriaProduto()
                 .stream()
                 .map(cp -> modelMapper.map(cp, CategoriaProdutoResponse.class))
                 .toList();
@@ -45,7 +45,7 @@ public class CategoriaProdutoService {
     }
 
     @Transactional
-    public CategoriaProdutoResponse criarProduto(CategoriaProdutoRequest dto) {
+    public CategoriaProdutoResponse criarCategoriaProduto(CategoriaProdutoRequest dto) {
         CategoriaProduto cp = new CategoriaProduto();
         cp.setNome(dto.getNome());
         cp.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
@@ -57,7 +57,7 @@ public class CategoriaProdutoService {
     }
 
     @Transactional
-    public CategoriaProdutoResponse atualizarProduto(Integer id, CategoriaProdutoRequest dto) {
+    public CategoriaProdutoResponse atualizarCategoriaProduto(Integer id, CategoriaProdutoRequest dto) {
         CategoriaProduto cp = categoriaProdutoRepository.obterCategoriaProdutoPeloId(id);
         if (cp == null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CategoriaProduto não encontrado");
         cp.setNome(dto.getNome());
@@ -68,7 +68,7 @@ public class CategoriaProdutoService {
     }
 
     @Transactional
-    public ProdutoDTOUpdateResponse atualizarStatusProduto(Integer id, CategoriaProdutoRequest dto) {
+    public ProdutoDTOUpdateResponse atualizarStatusCategoriaProduto(Integer id, CategoriaProdutoRequest dto) {
         CategoriaProduto cp = categoriaProdutoRepository.obterCategoriaProdutoPeloId(id);
         if (cp == null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CategoriaProduto não encontrado");
 

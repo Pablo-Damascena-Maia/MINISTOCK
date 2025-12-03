@@ -18,8 +18,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     @Query("UPDATE Produto p SET p.status = -1 WHERE p.id = :id")
     void apagadoLogicoProduto(@Param("id") Integer id);
 
-    @Query("SELECT p FROM Produto p WHERE p.status >= 0")
-    List<Produto> listarProdutos();
+    @Query("SELECT p FROM Produto p WHERE p.categoriaProduto.id=:idCategoria AND p.status >= 0")
+    List<Produto> listarProdutos(@Param("idCategoria") Integer id);
 
     @Query("SELECT p FROM Produto p WHERE p.id = :id AND p.status >= 0")
     Produto obterProdutoPeloId(@Param("id") Integer id);
