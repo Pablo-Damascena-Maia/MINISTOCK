@@ -34,7 +34,7 @@ public class SecurityConfiguration {
             "/api/produto/atualizarStatus",
             "/api/produto/listar",
             "/api/produto/listarPorId",
-            "/api/produto/apagar",
+            "/api/produto/apagar/{id}",
 
             "/api/notificacao/atualizar",
             "/api/notificacao/criar",
