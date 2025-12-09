@@ -62,6 +62,8 @@ public class SecurityConfiguration {
             "/api/categoriaProduto/listar",
             "/api/categoriaProduto/listarPorId/{id}",
             "/api/categoriaProduto/apagar/{id}",
+            "/apresentacao.html",
+            "/",
 
 
 
