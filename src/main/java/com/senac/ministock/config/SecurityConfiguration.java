@@ -65,7 +65,8 @@ public class SecurityConfiguration {
             "/apresentacao.html",
             "/",
             "/imagen/**",
-
+            "/imagen/*",
+            "/imagen",
 
 
             "/v3/api-docs/**",
