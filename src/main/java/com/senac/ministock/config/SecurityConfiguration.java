@@ -64,7 +64,7 @@ public class SecurityConfiguration {
             "/api/categoriaProduto/apagar/{id}",
             "/apresentacao.html",
             "/",
-            "/imagem/**",
+            "/imagen/**",
 
 
 
