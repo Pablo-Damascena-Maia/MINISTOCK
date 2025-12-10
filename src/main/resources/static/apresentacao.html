@@ -75,6 +75,13 @@
             border-left: 4px solid var(--secondary-color);
             padding-left: 10px;
         }
+        .section h4 {
+            color: var(--secondary-color);
+            margin-top: 20px;
+            font-size: 1.4em;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 10px;
+        }
 
         .features-grid {
             display: grid;
@@ -301,31 +308,43 @@
         </section>
 
         <section class="section">
-            <h2>Linha do Tempo de Progresso</h2>
-            <p>O desenvolvimento do MiniStock seguiu uma abordagem iterativa, focada em construir a funcionalidade principal, garantir a segurança e, por fim, integrar a infraestrutura de deploy.</p>
+            <h2>Linha do Tempo de Progresso Detalhada</h2>
+            <p>O desenvolvimento do MiniStock seguiu um cronograma estruturado, evoluindo da concepção à implementação de segurança e infraestrutura, conforme detalhado na Proposta Comercial e Técnica.</p>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-item-content">
-                        <h4>Fase 1: Estrutura e CRUD Básico</h4>
-                        <p>Implementação inicial das telas de estoque separadas por categoria (**Bebidas, Perecíveis, Não Perecíveis**) e desenvolvimento do **CRUD completo** para gerenciamento de produtos. Esta fase estabeleceu a base de dados e a interface primária do aplicativo.</p>
+                        <h4>Fase 1: Concepção, Design e Prototipagem</h4>
+                        <p>Início do projeto com o **Levantamento Detalhado** de requisitos (RFs e RNFs). Criação do **Mapa de Navegação** e **Design das Telas no Figma** para garantir a usabilidade e a experiência do usuário (UX/UI). Configuração dos repositórios e ambientes de desenvolvimento.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-item-content">
-                        <h4>Fase 2: Integração e Segurança (JWT)</h4>
-                        <p>Foco na integração do Frontend (React Native) com o Backend (Spring Boot). Foram identificados e corrigidos **múltiplos erros 403 (Forbidden)**, resultando em ajustes finos na lógica de autenticação **JWT** e no **Interceptor** de requisições do Axios, garantindo a comunicação segura e fluida.</p>
+                        <h4>Fase 2: Modelagem de Dados e Construção do Backend</h4>
+                        <p>Foco na camada de dados e API. **Modelagem do Banco de Dados** (MySQL) com as tabelas **`usuario`**, **`produto`**, **`movimentacao_estoque`**, **`notificacao`** e **`configuracao`**. Desenvolvimento dos **Endpoints RESTful** no Spring Boot para as operações CRUD essenciais, garantindo a persistência dos dados.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-item-content">
-                        <h4>Fase 3: Estilização e Refinamento de Dados</h4>
-                        <p>Unificação da **estilização** de todas as telas do aplicativo para um visual coeso e profissional. Refinamento do payload de dados, com a **remoção de campos desnecessários** do frontend (como URL da imagem e código de barras) para simplificar a experiência do usuário, mantendo a compatibilidade com o backend.</p>
+                        <h4>Fase 3: Desenvolvimento do Frontend e CRUD Básico</h4>
+                        <p>Criação das telas de estoque separadas por categoria (**Bebidas, Perecíveis, Não Perecíveis**) e implementação do **CRUD completo** no Frontend. Desenvolvimento da tela de **Movimentação** para registro de entradas e saídas de produtos.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-item-content">
-                        <h4>Fase 4: Infraestrutura e Apresentação</h4>
-                        <p>Criação do **Jenkinsfile** para automação do pipeline de CI/CD. Desenvolvimento do **endpoint `/apresentacao`** no backend para servir esta página HTML, e criação da página web de apresentação do projeto para documentação e download da APK.</p>
+                        <h4>Fase 4: Segurança, Estilização e Refinamento</h4>
+                        <p>Etapa crítica de estabilização: **Correção de Múltiplos Erros 403 (Forbidden)**, ajustando a lógica de validação do **JWT** e o **Interceptor** do Axios. **Estilização Unificada** de todas as telas para um visual coeso. **Remoção de campos desnecessários** (URL da imagem, código de barras) para simplificar o uso.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-item-content">
+                        <h4>Fase 5: Dashboard e Infraestrutura (CI/CD)</h4>
+                        <p>Implementação do **Dashboard** para visualização de métricas. Criação do **Jenkinsfile** para automação do pipeline de CI/CD (compilação da APK e deploy). Desenvolvimento do **Endpoint `/apresentacao`** no Backend para servir a documentação do projeto.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-item-content">
+                        <h4>Fase 6: Finalização e Entrega</h4>
+                        <p>Testes de integração e usabilidade. Preparação dos **Entregáveis** (código-fonte, manual do usuário). Compilação final da APK e deploy no ambiente de produção (`academico3.rj.senac.br`), concluindo o projeto.</p>
                     </div>
                 </div>
             </div>
@@ -378,7 +397,7 @@
                 <div class="tech-category">
                     <h3>DevOps e Qualidade</h3>
                     <ul>
-                        <li>**Jenkinsfile:** Script de pipeline de CI/CD para automatizar a compilação do aplicativo móvel (APK) e o processo de deploy, garantindo entregas rápidas e consistentes.</li>
+                        <li>**Jenkinsfile:** Script de pipeline de CI/CD para automação do pipeline de CI/CD para automatizar a compilação do aplicativo móvel (APK) e o processo de deploy, garantindo entregas rápidas e consistentes.</li>
                         <li>**Git Flow Simplificado:** Uso de repositórios separados (`MINISTOCK-FRONTEND` e `MINISTOCK`) para gerenciar o código-fonte de forma organizada.</li>
                         <li>**Correção de Erros 403:** Resolução de problemas de autenticação e autorização, incluindo ajustes no interceptor do Axios e na validação do JWT, garantindo a comunicação fluida entre as camadas.</li>
                     </ul>
@@ -391,19 +410,26 @@
             <p>O projeto está funcional e pronto para ser compilado e implantado no ambiente de produção.</p>
             <!-- O link será atualizado após a compilação e deploy da APK. -->
             <a href="ministock.apk" id="download-link">Baixar APK (Android)</a>
+            
+            
+        </section>
+        <section class="cta">
             <div class="qr-code-placeholder" style="margin-top: 20px; padding: 20px; border: 1px dashed #ccc; display: inline-block; text-align: center;">
-                <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);"> </p>
+                <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);"></p>
                 <!-- COLE A IMAGEM DO SEU QR CODE AQUI -->
                 <img src="./imagen/QR.png" alt="QR Code Placeholder" style="width: 150px; height: 150px; display: block; margin: 0 auto;">
                 <p style="margin-top: 10px; font-size: 0.8em; color: #777;"></p>
+                <p style="margin-top: 15px; font-size: 0.9em; color: #777;"></p>
             </div>
-            <p style="margin-top: 15px; font-size: 0.9em; color: #777;"></p>
         </section>
+
     </div>
 
     <footer>
         <div class="container">
             <p>&copy; 2025 MiniStock Project. Desenvolvido por Pablo Damascena Maia.</p>
+            <p>Email:pablodmaia533@gmail.com</p>
+            <p>Telefone:(21)99076-5381</p>
             <p>Ambiente de Deploy: academico3.rj.senac.br</p>
         </div>
     </footer>
